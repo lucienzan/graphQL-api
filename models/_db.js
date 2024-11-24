@@ -1,4 +1,4 @@
-import { authors } from "./authors.js";
+import { authors, setAuthors } from "./authors.js";
 import { books } from "./books.js";
 
-export default { authors, books }
+export default { authors, setAuthors, books }

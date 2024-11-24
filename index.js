@@ -48,6 +48,27 @@ const resolvers = {
   },
   Books: {
     author: (parent) => _db.authors().find((x) => x.id == parent.id)
+  },
+  Mutation: {
+    deleteAuthor: (_, arg) => _db.authors().filter((author) => author.id != arg.id),
+    addAuthor: (_, arg) => {
+      let author = {
+        ...arg.author,
+        id: _db.authors().length + 1
+      };
+      _db.authors().push(author);
+      return author;
+    },
+    updateAuthor: (_, arg) => {
+      const author = _db.authors().map((item) => {
+        if (item.id == arg.id) {
+          return { ...item, ...arg.edit }
+        }
+        return item;
+      });
+      _db.setAuthors(author);
+      return _db.authors().find((a) => a.id == arg.id)
+    }
   }
 };
 

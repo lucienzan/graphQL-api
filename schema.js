@@ -1,5 +1,3 @@
-import { GraphQLScalarType, Kind } from 'graphql';
-
 export const typeDefs = `#graphql
   scalar Date
 
@@ -29,5 +27,29 @@ export const typeDefs = `#graphql
     author(id: ID!): Authors,
     books: [Books],
     book(id: ID!): Books
+  }
+
+  type Mutation {
+    deleteAuthor(id: ID!):[Authors],
+    addAuthor(author: AuthorFields): Authors,
+    updateAuthor(id: ID!, edit: editAuthor!): Authors
+  }
+
+  input AuthorFields {
+    firstName: String,
+    lastName: String,
+    email: String!,
+    password: String!,
+    bio: String,
+    address: String
+  }
+
+  input editAuthor {
+    firstName: String,
+    lastName: String,
+    email: String,
+    password: String,
+    bio: String,
+    address: String
   }
 `;
